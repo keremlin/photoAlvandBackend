@@ -16,10 +16,6 @@ public class PhotoalvandApplication {
 	  SpringApplication.run(PhotoalvandApplication.class, args);
 	}
   
-	@Override
-	public void run(String... arg) throws Exception {
-	  storageService.deleteAll();
-	  storageService.init();
-	}
+	
 
 }

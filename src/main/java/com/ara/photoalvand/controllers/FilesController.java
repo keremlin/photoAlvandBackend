@@ -42,7 +42,7 @@ public class FilesController {
     }
   }
 
-  @GetMapping("/api/file//files")
+  @GetMapping("/api/file/files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
       String filename = path.getFileName().toString();
