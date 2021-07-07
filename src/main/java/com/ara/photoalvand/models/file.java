@@ -1,6 +1,7 @@
 package com.ara.photoalvand.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,20 +33,22 @@ public class file {
     @ManyToOne
     private album album;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<category> categories;
 
     @ManyToOne
     private User owner;
 
-    @ManyToMany
-    private Collection<order> orders;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<orderCase> orderCases;
 
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date createDate;
 
     private String photographer;
+    
+    private int price;
 
     private boolean isAccepted;
     private boolean isReviewed;

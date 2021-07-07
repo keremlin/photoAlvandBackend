@@ -1,7 +1,5 @@
 package com.ara.photoalvand.services;
 
-import java.util.List;
-
 import com.ara.photoalvand.models.category;
 
 public interface Icategory {

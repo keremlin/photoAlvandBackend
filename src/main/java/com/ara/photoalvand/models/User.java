@@ -8,6 +8,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 
@@ -31,6 +34,9 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+	
+	@OneToMany
+	private Set<file> files;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 

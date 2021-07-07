@@ -5,21 +5,23 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.models.file;
 import com.ara.photoalvand.models.fileDataVM;
+import com.ara.photoalvand.repository.UserRepository;
 import com.ara.photoalvand.repository.categoryRepository;
 import com.ara.photoalvand.repository.fileRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +32,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   private final Path root = Paths.get("uploads");
   @Autowired private fileRepository repo;
   @Autowired private categoryRepository categoryRepo;
+  @Autowired private UserRepository repoUser;
   @Override
   public void init() {
     try {
@@ -87,11 +90,18 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     }
   }
   @Override
+  public fileDataVM findFile(int id){
+    try{
+      return convertFileToFileDataVM(repo.findById(id));
+    }catch(Exception e){
+      return null;}
+  }
+  @Override
   public boolean saveFilesData(Stream<fileDataVM> fileData) {
     fileData.map(item -> {
       var temp = repo.findById(item.getId());
       Arrays.stream(item.getCategories()).map(category -> {
-        var cat = categoryRepo.findCategoryById(category);
+        var cat = categoryRepo.findCategoryById(category).get();
         if (temp.getCategories().stream().filter(x -> x.getId() == cat.getId()).findFirst().isPresent())
           return 0;
         temp.getCategories().add(cat);
@@ -104,16 +114,48 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     });
     return false;
   }
+  
   @Override
   public boolean saveFilesData(fileDataVM[] fileData) {
-    for (fileDataVM item : fileData) {
-      var temp=repo.findById(item.getId());
-      for (category itemCategory : temp.getCategories()) {
-        if(!IntStream.of(item.getCategories()).anyMatch(x -> x == itemCategory.getId()))
-          return false;
+    try {
+      for (fileDataVM item : fileData) {
+        if (item!=null && (item.getFormname().length() > 0 || item.getFormdescription().length() > 0)) {
+          var temp = repo.findById(item.getId());
+          var currenUser=repoUser.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+          temp.setCategories(categoryRepo.findCategoryByIds(List.of(item.getCategories())));
+          temp.setTitle(item.getFormname());
+          temp.setDescription(item.getFormdescription());
+          temp.setPrice(item.getFormprice());
+          temp.setReviewed(true);
+          temp.setOwner(currenUser);
+          temp.setCreateDate(new Date());
+          repo.save(temp);
+        }
       }
+    } catch (Exception e) {
+
     }
+   
+
     return false;
+  }
+   
+  private static fileDataVM convertFileToFileDataVM(file item) {
+    if (item != null) {
+      var vm = new fileDataVM();
+      vm.setFormname(item.getTitle());
+      vm.setFormdescription(item.getDescription());
+      vm.setFormprice(item.getPrice());
+      vm.setId(item.getId());
+      vm.setUserName(item.getOwner().getUsername());
+      vm.setCreateDate(item.getCreateDate());
+      vm.setCat(item.getCategories().stream().map(c->c).collect(Collectors.toList()).toArray(category[]::new));
+      vm.setCategories(
+          item.getCategories().stream().map(x -> x.getId()).collect(Collectors.toList()).toArray(Integer[]::new));
+      vm.setFilePath(util.convertFileNameToPath( item.getPhysicalPath()));    
+      return vm;
+    } else
+      return null;
   }
 
 }

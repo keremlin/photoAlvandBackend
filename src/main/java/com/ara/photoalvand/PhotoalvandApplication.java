@@ -3,7 +3,7 @@ package com.ara.photoalvand;
 import javax.annotation.Resource;
 
 import com.ara.photoalvand.services.FilesStorageService;
-import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

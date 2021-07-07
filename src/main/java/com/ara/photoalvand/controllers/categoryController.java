@@ -1,9 +1,6 @@
 package com.ara.photoalvand.controllers;
 
-import java.util.List;
-
 import com.ara.photoalvand.models.category;
-import com.ara.photoalvand.services.Icategory;
 import com.ara.photoalvand.services.categoryImp;
 
 import org.springframework.beans.factory.annotation.Autowired;

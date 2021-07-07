@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class order {
+public class orderCase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

@@ -1,11 +1,8 @@
 package com.ara.photoalvand.services;
 
-import java.util.List;
-
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.repository.categoryRepository;
 
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +40,7 @@ public class categoryImp implements Icategory {
     @Override
     public category findById(int item){
         try{
-          return repo.findCategoryById(item);  
+          return repo.findCategoryById(item).get();  
         }catch(Exception e){return null;}
     }
 }
