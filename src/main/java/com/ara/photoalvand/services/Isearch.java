@@ -6,4 +6,5 @@ import com.ara.photoalvand.viewModels.VMsearch;
 
 public interface Isearch {
     public List<VMsearch> byCategory(int id);
+    public int numberOfCategoryItems(int id);
 }

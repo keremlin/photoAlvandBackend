@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 public interface categoryRepository extends JpaRepository<category,Long> {
     public Optional<category> findCategoryById(int id);
     public List<category> findAll();
+    public List<category> findByFilesNotNull();
+    
     
     @Transactional
     @Query( "FROM category c WHERE c.id in (:ids)")

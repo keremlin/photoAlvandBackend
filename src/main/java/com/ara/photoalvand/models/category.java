@@ -1,9 +1,14 @@
 package com.ara.photoalvand.models;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -19,4 +24,7 @@ public class category {
     private String name;
 
     private String description;
+
+    @ManyToMany
+    private Collection<file> files;
 }

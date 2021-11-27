@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,10 @@ import com.ara.photoalvand.services.FilesStorageService;
 import com.ara.photoalvand.services.util;
 
 @Controller
-@CrossOrigin("http://localhost:8081")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FilesController {
-
+ 
+  
   @Autowired
   FilesStorageService storageService;
 
@@ -34,9 +36,8 @@ public class FilesController {
   public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
     String message = "";
     try {
-      storageService.save(file);
-
-      message = "فایل با موفقیت بارگزاری شد  " + file.getOriginalFilename();
+      var savedFile=storageService.save(file);
+      message = savedFile.getPhysicalPath();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     } catch (Exception e) {
       message = "Could not upload the file: " + file.getOriginalFilename() + "!";

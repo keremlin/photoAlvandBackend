@@ -53,6 +53,7 @@ public class file {
     private boolean isAccepted;
     private boolean isReviewed;
     private boolean isEnabled;
+    private boolean isOtherUse;
 
 
     

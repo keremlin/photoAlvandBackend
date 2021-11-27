@@ -13,5 +13,6 @@ public interface fileRepository extends CrudRepository<file,Integer>
     public List<file> findFileByisReviewed(boolean isReviewed);
     public file findById(int id);
     public List<file> findFileBycategories(category category);
+    public int countByCategories(category category);
     
 }

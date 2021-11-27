@@ -19,20 +19,33 @@ import com.ara.photoalvand.repository.categoryRepository;
 import com.ara.photoalvand.repository.fileRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
+@Component
 public class FilesStorageServiceImpl implements FilesStorageService {
+  
+	private String fileUploadPath;
 
-  private final Path root = Paths.get("uploads");
+  private final Path root;
   @Autowired private fileRepository repo;
   @Autowired private categoryRepository categoryRepo;
   @Autowired private UserRepository repoUser;
+  
+  public FilesStorageServiceImpl(@Value("${ara.photoalvand.fileUploadPath}") String fileUploadPath){
+    super();
+    this.fileUploadPath=fileUploadPath;
+    System.out.println(this.fileUploadPath);
+    root=Paths.get(fileUploadPath); 
+  }
+
   @Override
   public void init() {
     try {
@@ -43,7 +56,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   }
 
   @Override
-  public void save(MultipartFile file) {
+  public file save(MultipartFile file) {
     var miliSecondTimeFileName=
      java.time.ZonedDateTime.now().toInstant().toEpochMilli()+
      "--"+file.getOriginalFilename();
@@ -53,10 +66,13 @@ public class FilesStorageServiceImpl implements FilesStorageService {
       entity.setTitle("");
       entity.setPhysicalPath(miliSecondTimeFileName);
       entity.setReviewed(false);
-      repo.save(entity);
+      entity.setOtherUse(false);
+      entity=repo.save(entity);
+      return entity;
     } catch (Exception e) {
       throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
     }
+
   }
 
   @Override

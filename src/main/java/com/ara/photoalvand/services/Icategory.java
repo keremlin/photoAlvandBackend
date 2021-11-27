@@ -1,6 +1,7 @@
 package com.ara.photoalvand.services;
 
 import com.ara.photoalvand.models.category;
+import com.ara.photoalvand.viewModels.VMcategory;
 
 public interface Icategory {
     public boolean create(category item);
@@ -8,4 +9,6 @@ public interface Icategory {
     public Iterable<category> list();
     public category find(String item);
     public category findById(int item);
+    public VMcategory findWithRandomImage(int item);
+    public Iterable<VMcategory> getRandomeCateory(int number);
 }

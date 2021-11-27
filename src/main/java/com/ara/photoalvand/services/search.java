@@ -30,5 +30,10 @@ public class search implements Isearch {
         else
             return null;
     }
+    @Override
+    public int numberOfCategoryItems(int id){
+        return repoFile.countByCategories(repoCategory.findCategoryById(id).get());
+    }
+    
 
 }
