@@ -1,8 +1,10 @@
 package com.ara.photoalvand.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -23,6 +25,7 @@ import com.ara.photoalvand.models.FileInfo;
 import com.ara.photoalvand.models.fileDataVM;
 import com.ara.photoalvand.services.FilesStorageService;
 import com.ara.photoalvand.services.util;
+import com.ara.photoalvand.viewModels.vmReturnObject;
 
 @Controller
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -33,15 +36,21 @@ public class FilesController {
   FilesStorageService storageService;
 
   @PostMapping("/api/file/upload")
-  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-    String message = "";
+  public ResponseEntity<vmReturnObject> uploadFile(@RequestParam("file") MultipartFile file) {
     try {
       var savedFile=storageService.save(file);
-      message = savedFile.getPhysicalPath();
-      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+      var response=vmReturnObject.builder()
+                                  .message(savedFile.getPhysicalPath())
+                                  .id(savedFile.getId())
+                                  .build();
+      return ResponseEntity.status(HttpStatus.OK).body(response);
     } catch (Exception e) {
-      message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+      var response=vmReturnObject.builder()
+                                  .message("Could not upload the file: " + file.getOriginalFilename() + "!")
+                                  .id(0)
+                                  .code(300)
+                                  .build();
+      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(response);
     }
   }
   
@@ -65,6 +74,11 @@ public class FilesController {
 public ResponseEntity<fileDataVM> getFileInfo(@PathVariable int id) {
     return ResponseEntity.status(HttpStatus.OK).body(storageService.findFile(id));
 }
+@PostMapping("/api/file/fileInfos")
+public ResponseEntity<List<fileDataVM>> getFileInfo2(@RequestBody int[] ids) {
+    return ResponseEntity.status(HttpStatus.OK).body(storageService.findFiles(ids));
+}
+
 
   @GetMapping("/api/file/files/{filename:.+}")
   public ResponseEntity<Resource> getFile(@PathVariable String filename) {

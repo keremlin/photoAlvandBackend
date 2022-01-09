@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -110,7 +111,14 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     try{
       return convertFileToFileDataVM(repo.findById(id));
     }catch(Exception e){
+      e.printStackTrace();
       return null;}
+  }
+  @Override 
+  public List<fileDataVM> findFiles(int[] ids){
+    List<fileDataVM> list=new ArrayList<>();
+    Arrays.stream(ids).forEach(id->list.add(this.findFile(id)));
+    return list;
   }
   @Override
   public boolean saveFilesData(Stream<fileDataVM> fileData) {
@@ -163,7 +171,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
       vm.setFormdescription(item.getDescription());
       vm.setFormprice(item.getPrice());
       vm.setId(item.getId());
-      vm.setUserName(item.getOwner().getUsername());
+      if (item.getOwner()!=null) vm.setUserName(item.getOwner().getUsername());
       vm.setCreateDate(item.getCreateDate());
       vm.setCat(item.getCategories().stream().map(c->c).collect(Collectors.toList()).toArray(category[]::new));
       vm.setCategories(

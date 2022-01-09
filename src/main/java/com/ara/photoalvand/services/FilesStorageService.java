@@ -1,5 +1,6 @@
 package com.ara.photoalvand.services;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import com.ara.photoalvand.models.file;
@@ -22,4 +23,5 @@ public interface FilesStorageService {
   public boolean saveFilesData(Stream<fileDataVM> fileData);
   public boolean saveFilesData(fileDataVM[] fileData);
   public fileDataVM findFile(int id);
+  public List<fileDataVM> findFiles(int[] ids);
 }

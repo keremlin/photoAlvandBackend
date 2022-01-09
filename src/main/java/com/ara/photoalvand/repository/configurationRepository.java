@@ -1,5 +1,6 @@
 package com.ara.photoalvand.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface configurationRepository extends CrudRepository<configuration,Integer> {
     Optional<configuration> findById(int id);
     Optional<configuration> findByConfigKey(String configKey);
-    Iterable<configuration> findAll();
+    List<configuration> findAll();
         
 }
