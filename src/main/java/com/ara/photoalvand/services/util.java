@@ -3,9 +3,6 @@ package com.ara.photoalvand.services;
 import java.util.Random;
 
 import com.ara.photoalvand.controllers.FilesController;
-import com.ara.photoalvand.repository.categoryRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 public class util {

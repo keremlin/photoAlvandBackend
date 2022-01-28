@@ -8,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -33,12 +35,23 @@ public class User {
 
 	@NotBlank
 	@Size(max = 120)
+	@JsonIgnore
 	private String password;
+
+	@Size(max = 30)
+	private String firstName;
+	@Size(max = 30)	
+	private String lastName;
+	
+	@Size(max=13)
+	private String phone;
 	
 	@OneToMany
+	@JsonIgnore
 	private Set<file> files;
 
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))

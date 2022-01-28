@@ -1,6 +1,5 @@
 package com.ara.photoalvand.services;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.ara.photoalvand.repository.categoryRepository;

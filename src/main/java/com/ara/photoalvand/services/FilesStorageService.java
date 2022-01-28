@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.ara.photoalvand.models.file;
-import com.ara.photoalvand.models.fileDataVM;
+import com.ara.photoalvand.viewModels.fileDataVM;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

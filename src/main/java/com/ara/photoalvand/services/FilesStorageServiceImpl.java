@@ -14,19 +14,17 @@ import java.util.stream.Stream;
 
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.models.file;
-import com.ara.photoalvand.models.fileDataVM;
+import com.ara.photoalvand.viewModels.fileDataVM;
 import com.ara.photoalvand.repository.UserRepository;
 import com.ara.photoalvand.repository.categoryRepository;
 import com.ara.photoalvand.repository.fileRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +42,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     super();
     this.fileUploadPath=fileUploadPath;
     System.out.println(this.fileUploadPath);
+    System.out.println("File storage service is loadded ....................................");
     root=Paths.get(fileUploadPath); 
   }
 

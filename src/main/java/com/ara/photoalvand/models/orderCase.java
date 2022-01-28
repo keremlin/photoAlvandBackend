@@ -13,11 +13,19 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Entity
+@AllArgsConstructor
+@Builder
+
 public class orderCase {
+    public orderCase(){
+        super();
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -39,5 +47,7 @@ public class orderCase {
     private String bankTransactionNumber;
 
     private boolean isFinished;
+
+    
     
 }

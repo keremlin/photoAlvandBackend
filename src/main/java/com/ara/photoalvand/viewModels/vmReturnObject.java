@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class vmReturnObject {
+public class vmReturnObject implements IReturnObject {
     int id;
+    int code;
     String message;
     String name;
-    int code;
-
 }

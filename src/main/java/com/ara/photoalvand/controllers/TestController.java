@@ -14,11 +14,11 @@ public class TestController {
 	@GetMapping("/all")
 	public String allAccess() {
 		return "Public Content.";
-	}
-	
+	}	
 	@GetMapping("/user")
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public String userAccess() {
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
 		return "User Content.";
 	}
 

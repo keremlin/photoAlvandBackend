@@ -2,7 +2,7 @@ package com.ara.photoalvand.controllers;
 
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.services.categoryImp;
-import com.ara.photoalvand.services.config;
+
 import com.ara.photoalvand.viewModels.VMcategory;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

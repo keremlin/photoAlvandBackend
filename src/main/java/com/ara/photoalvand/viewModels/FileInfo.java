@@ -1,4 +1,4 @@
-package com.ara.photoalvand.models;
+package com.ara.photoalvand.viewModels;
 
 import lombok.Data;
 @Data

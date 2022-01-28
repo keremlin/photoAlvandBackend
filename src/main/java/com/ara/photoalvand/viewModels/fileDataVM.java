@@ -1,6 +1,9 @@
-package com.ara.photoalvand.models;
+package com.ara.photoalvand.viewModels;
 
 import java.util.Date;
+
+import com.ara.photoalvand.models.category;
+
 import lombok.Data;
 
 @Data

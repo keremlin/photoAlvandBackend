@@ -1,12 +1,10 @@
 package com.ara.photoalvand.controllers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ara.photoalvand.payload.ResponseMessage;
-import com.ara.photoalvand.models.FileInfo;
-import com.ara.photoalvand.models.fileDataVM;
 import com.ara.photoalvand.services.FilesStorageService;
 import com.ara.photoalvand.services.util;
+import com.ara.photoalvand.viewModels.FileInfo;
+import com.ara.photoalvand.viewModels.fileDataVM;
 import com.ara.photoalvand.viewModels.vmReturnObject;
 
 @Controller
@@ -78,8 +76,6 @@ public ResponseEntity<fileDataVM> getFileInfo(@PathVariable int id) {
 public ResponseEntity<List<fileDataVM>> getFileInfo2(@RequestBody int[] ids) {
     return ResponseEntity.status(HttpStatus.OK).body(storageService.findFiles(ids));
 }
-
-
   @GetMapping("/api/file/files/{filename:.+}")
   public ResponseEntity<Resource> getFile(@PathVariable String filename) {
     Resource file = storageService.load(filename);
