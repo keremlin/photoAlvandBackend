@@ -19,9 +19,11 @@ public class vmKart extends returnObjectDecorator {
     public vmKart(List<orderCase> cases,User user,FilesStorageService storageService) {
         this.storageService=storageService;
         this.user=user;
-        returnObject = new vmReturnObject(cases.get(0).getId(), 1, "message", "name");
-        if (!cases.isEmpty())
+        if (!cases.isEmpty()) {
+            returnObject = new vmReturnObject(cases.get(0).getId(), 1, "message", "name");
             setOrder(cases.get(0));
+        }
+
     }
 
     public void setOrder(orderCase item) {

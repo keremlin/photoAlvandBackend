@@ -33,7 +33,7 @@ public class configurationService implements Iconfigration {
         return (optional.isPresent() ? repo.save(conf) : null);
     }
     public List<configuration> getAllConfigurations(){
-        return (repo.findAll());
+        return repo.findAll();
     }
     public boolean deleteConfiguration(String configKey){
         if(configKey!=null && !configKey.equals("")){
@@ -50,5 +50,9 @@ public class configurationService implements Iconfigration {
                 updateConfig(item);
         }
         return true;
+    }
+   
+    public boolean isConfigurationsAvailable() {
+        return (getAllConfigurations().size() > 0 ? true : false);
     }
 }

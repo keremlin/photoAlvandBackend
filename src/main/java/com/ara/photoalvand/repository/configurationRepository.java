@@ -15,5 +15,6 @@ public interface configurationRepository extends CrudRepository<configuration,In
     Optional<configuration> findById(int id);
     Optional<configuration> findByConfigKey(String configKey);
     List<configuration> findAll();
-        
+    // List<configuration> findAllConfiguration();
+    // boolean exists();
 }

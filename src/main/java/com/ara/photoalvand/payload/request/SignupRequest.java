@@ -19,11 +19,48 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    @NotBlank
+    @Size(min=6,max=256)
+    private String name;
+
+    @NotBlank
+    @Size(min=6,max=256)
+    private String fname;
+
+    
+    @NotBlank
+    @Size(min=6,max=12)
+    private String mobile;
   
     public String getUsername() {
         return username;
     }
  
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
