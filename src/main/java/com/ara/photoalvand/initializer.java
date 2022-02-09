@@ -2,6 +2,8 @@ package com.ara.photoalvand;
 
 import com.ara.photoalvand.models.configuration;
 import com.ara.photoalvand.services.configurationService;
+import com.ara.photoalvand.services.userService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,11 +16,16 @@ public class initializer {
     private static final Logger log = LoggerFactory.getLogger(initializer.class);
     @Autowired
 	private configurationService configurationS;
+    @Autowired
+    private userService UserService;
     
     @Bean
     public void init(){
         log.info("Start init...");
         log.info(configurationS.isConfigurationsAvailable()+" -09");
+        log.info( "Init Users and Roles ...");
+        UserService.initRoles();
+        UserService.initAdminUser();
         if(configurationS.isConfigurationsAvailable()==false)
         {
             log.info("Config slider ....");
