@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,5 +26,6 @@ public class category {
     private String description;
 
     @ManyToMany
+    @JsonIgnore
     private Collection<file> files;
 }
