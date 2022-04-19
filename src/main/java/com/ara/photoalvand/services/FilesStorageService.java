@@ -21,7 +21,12 @@ public interface FilesStorageService {
   public Stream<file> loadAll();
 
   public boolean saveFilesData(Stream<fileDataVM> fileData);
+
   public boolean saveFilesData(fileDataVM[] fileData);
+
   public fileDataVM findFile(int id);
+
   public List<fileDataVM> findFiles(int[] ids);
+
+  public boolean deleteFile(int id); 
 }
