@@ -78,7 +78,16 @@ public class categoryImp implements Icategory {
         return list;
     }
     @Override
+<<<<<<< HEAD
     public List<category> getAllCategories() {
         return repo.findAll();
+=======
+    public List<VMcategory> getAllCategories() {
+        List<VMcategory> list=new ArrayList<>();
+        repo.findAll().forEach((item)->{
+            list.add(findWithRandomImage(item.getId()));
+        });
+        return list;
+>>>>>>> 833e0bae060ea661a67ae82e116d1132d8cca02a
     }
 }

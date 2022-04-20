@@ -19,6 +19,10 @@ public interface Icategory {
     public VMcategory findWithRandomImage(int item);
 
     public Iterable<VMcategory> getRandomeCateory(int number);
+<<<<<<< HEAD
 
     public List<category> getAllCategories();
+=======
+    public List<VMcategory> getAllCategories() ;
+>>>>>>> 833e0bae060ea661a67ae82e116d1132d8cca02a
 }

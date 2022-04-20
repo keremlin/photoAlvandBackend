@@ -56,7 +56,14 @@ public class categoryController {
 		return ResponseEntity.status(HttpStatus.OK).body(service.getRandomeCateory(number));
 	}
 	@GetMapping("/getAllCategories")
+<<<<<<< HEAD
 	public ResponseEntity<List<category>> getAllCategories(){
 		return ResponseEntity.status(HttpStatus.OK).body(service.getAllCategories());
 	}
+=======
+	public ResponseEntity<Iterable<VMcategory>> getAllCategories(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.getAllCategories());
+	}
+
+>>>>>>> 833e0bae060ea661a67ae82e116d1132d8cca02a
 }

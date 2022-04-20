@@ -42,7 +42,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     super();
     this.fileUploadPath=fileUploadPath;
     System.out.println(this.fileUploadPath);
-    System.out.println("File storage service is loadded ....................................");
+    System.out.println("File storage service is loaded ....................................");
     root=Paths.get(fileUploadPath); 
   }
 
@@ -94,6 +94,19 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   @Override
   public void deleteAll() {
     FileSystemUtils.deleteRecursively(root.toFile());
+  }
+  @Override
+  public boolean deleteFile(int id) {
+    var item = repo.findById(id);
+    try {
+      repo.delete(item);
+      Files.delete(root.resolve(item.getPhysicalPath()));
+      return true;
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      return false;
+    }
   }
 
   @Override
