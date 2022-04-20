@@ -1,6 +1,7 @@
 package com.ara.photoalvand.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.repository.categoryRepository;
@@ -75,5 +76,9 @@ public class categoryImp implements Icategory {
                    );
         }
         return list;
+    }
+    @Override
+    public List<category> getAllCategories() {
+        return repo.findAll();
     }
 }

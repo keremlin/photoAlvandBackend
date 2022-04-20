@@ -1,5 +1,7 @@
 package com.ara.photoalvand.controllers;
 
+import java.util.List;
+
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.services.categoryImp;
 
@@ -52,5 +54,9 @@ public class categoryController {
 	@GetMapping("/getRandomCategory/{number}")
 	public ResponseEntity<Iterable<VMcategory>> getRandomeCategory(@PathVariable int number){
 		return ResponseEntity.status(HttpStatus.OK).body(service.getRandomeCateory(number));
+	}
+	@GetMapping("/getAllCategories")
+	public ResponseEntity<List<category>> getAllCategories(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.getAllCategories());
 	}
 }
