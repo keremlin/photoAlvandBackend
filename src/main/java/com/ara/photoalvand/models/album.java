@@ -28,7 +28,7 @@ public class album {
     
     private String description;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="albums")
     private Collection<category> categories;
 
     @Temporal(TemporalType.TIMESTAMP)

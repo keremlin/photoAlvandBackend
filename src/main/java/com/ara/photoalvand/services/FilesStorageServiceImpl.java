@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.ara.photoalvand.exception.FileIsNotDeleted;
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.models.file;
 import com.ara.photoalvand.viewModels.fileDataVM;
@@ -95,18 +96,22 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   public void deleteAll() {
     FileSystemUtils.deleteRecursively(root.toFile());
   }
+
   @Override
   public boolean deleteFile(int id) {
     var item = repo.findById(id);
+
     try {
-      repo.delete(item);
-      Files.delete(root.resolve(item.getPhysicalPath()));
-      return true;
+      if (item.getOrderCases().isEmpty()) {
+        repo.delete(item);
+        Files.delete(root.resolve(item.getPhysicalPath()));
+        return true;
+      }
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
-      return false;
+      throw new FileIsNotDeleted();
     }
+    return false;
   }
 
   @Override

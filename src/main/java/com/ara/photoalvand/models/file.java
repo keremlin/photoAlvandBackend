@@ -39,7 +39,7 @@ public class file {
     @ManyToOne
     private User owner;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy="files")
     private Collection<orderCase> orderCases;
 
     @Temporal(TemporalType.TIMESTAMP)
