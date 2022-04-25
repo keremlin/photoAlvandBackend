@@ -15,6 +15,8 @@ public class util {
 
     public static int RandomNumberBetween(int A, int B) {
         Random r = new Random();
-        return (r.nextInt(B - A) + A);
+        if (A == B)
+            return A;
+        return (B - A >= 1 && A >= 0 && B >= 0 ? (r.nextInt(B - A) + A) : 0);
     }
 }
