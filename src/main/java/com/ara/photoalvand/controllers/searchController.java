@@ -2,7 +2,7 @@ package com.ara.photoalvand.controllers;
 
 import java.util.List;
 
-import com.ara.photoalvand.services.search;
+import com.ara.photoalvand.services.SearchImpl;
 import com.ara.photoalvand.viewModels.VMsearch;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/search")
 public class searchController {
 	@Autowired
-	private search searchService;
+	private SearchImpl searchService;
 	@GetMapping("/byCategory/{category}")
 	public ResponseEntity<List<VMsearch>> byCategory(@PathVariable int category) {
 		return ResponseEntity.status(HttpStatus.OK).body(searchService.byCategory(category));

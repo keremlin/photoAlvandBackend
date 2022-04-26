@@ -18,4 +18,17 @@ public class HandleException {
         return ex.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.NOT_MODIFIED)
+    @ExceptionHandler(RecordPersistanceException.class)
+    public String handleRecordPersistanceException(RecordPersistanceException ex){
+        log.error("Record Persistance exception : "+ ex.getMessage());
+        return ex.getMessage();
+    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(RecordNotFoundException.class)
+    public String handleRecordNotFoundException(RecordNotFoundException ex){
+        log.error(ex.getMessage());
+        return ex.getMessage();
+    }
+
 }

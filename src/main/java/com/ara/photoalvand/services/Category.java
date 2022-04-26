@@ -5,10 +5,11 @@ import java.util.List;
 import com.ara.photoalvand.models.category;
 import com.ara.photoalvand.viewModels.VMcategory;
 
-public interface Icategory {
-    public boolean create(category item);
+public interface Category {
 
-    public boolean delete(int id);
+    public category create(category item);
+
+    public category delete(int id);
 
     public Iterable<category> list();
 
@@ -18,6 +19,7 @@ public interface Icategory {
 
     public VMcategory findWithRandomImage(int item);
 
-    public Iterable<VMcategory> getRandomeCateory(int number);
-    public List<VMcategory> getAllCategories() ;
+    public Iterable<VMcategory> getRandomCategory(int number);
+
+    public List<VMcategory> getAllCategories();
 }
